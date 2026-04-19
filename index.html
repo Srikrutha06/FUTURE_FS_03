@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nimrah Café & Bakery – Charminar, Hyderabad</title>
+  <meta name="description" content="Since 1939 – Hyderabad's most iconic Irani Café near Charminar. Famous for Osmania Biscuits, Irani Chai, and authentic Hyderabadi breakfast.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================
+       CSS VARIABLES & RESET
+    ============================================ */
+    :root {
+      --cream:       #F5EDD9;
+      --parchment:   #EDE0C4;
+      --chai:        #B8732A;
+      --chai-dark:   #8C531A;
+      --chai-light:  #D4954A;
+      --espresso:    #2C1810;
+      --ink:         #1A0F08;
+      --rust:        #9B3E1E;
+      --sage:        #6B7C5C;
+      --gold:        #C8A96E;
+      --warm-white:  #FAF6EE;
+
+      --ff-display: 'Playfair Display', Georgia, serif;
+      --ff-body:    'Crimson Pro', Georgia, serif;
+      --ff-mono:    'DM Mono', monospace;
+
+      --section-pad: clamp(5rem, 10vw, 9rem);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--espresso);
+      font-family: var(--ff-body);
+      font-size: clamp(1rem, 1.1vw, 1.15rem);
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    img { display: block; max-width: 100%; }
+    a  { color: inherit; text-decoration: none; }
+
+    /* ============================================
+       NOISE TEXTURE OVERLAY
+    ============================================ */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 9999;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+    }
+
+    /* ============================================
+       NAV
+    ============================================ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem clamp(1.5rem, 5vw, 4rem);
+      background: rgba(245,237,217,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(184,115,42,0.18);
+      transition: background 0.3s;
+    }
+
+    .nav-logo {
+      font-family: var(--ff-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--chai-dark);
+      letter-spacing: -0.01em;
+    }
+
+    .nav-logo span { font-style: italic; color: var(--rust); }
+
+    .nav-links {
+      display: flex; gap: 2.5rem;
+      list-style: none;
+      font-family: var(--ff-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .nav-links a {
+      color: var(--espresso);
+      opacity: 0.7;
+      transition: opacity 0.2s, color 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; color: var(--chai); }
+
+    .nav-cta {
+      font-family: var(--ff-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.55rem 1.4rem;
+      background: var(--chai);
+      color: var(--warm-white);
+      border-radius: 2px;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--chai-dark); }
+
+    /* hamburger */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--espresso); transition: 0.3s; }
+
+    /* ============================================
+       HERO
+    ============================================ */
+    #hero {
+      min-height: 100svh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+      padding-top: 5rem;
+    }
+
+    .hero-left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: clamp(3rem, 8vw, 7rem) clamp(1.5rem, 5vw, 5rem);
+      padding-right: 2rem;
+      position: relative; z-index: 2;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--ff-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--chai);
+      margin-bottom: 1.2rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block; width: 2.5rem; height: 1px;
+      background: var(--chai);
+    }
+
+    h1 {
+      font-family: var(--ff-display);
+      font-size: clamp(3.2rem, 6vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.04;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      margin-bottom: 1.6rem;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--chai);
+      display: block;
+    }
+
+    .hero-desc {
+      font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+      color: var(--espresso);
+      opacity: 0.8;
+      max-width: 42ch;
+      margin-bottom: 2.8rem;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--chai);
+      color: var(--warm-white);
+      font-family: var(--ff-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.9rem 2rem;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--chai-dark); transform: translateY(-1px); }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      border: 1px solid var(--chai);
+      color: var(--chai);
+      font-family: var(--ff-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.9rem 2rem;
+      border-radius: 2px;
+      transition: background 0.2s, color 0.2s, transform 0.15s;
+    }
+    .btn-ghost:hover { background: var(--chai); color: white; transform: translateY(-1px); }
+
+    .hero-stats {
+      display: flex; gap: 2.5rem; margin-top: 3.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(184,115,42,0.25);
+    }
+
+    .stat-num {
+      font-family: var(--ff-display);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--chai);
+      display: block;
+    }
+
+    .stat-label {
+      font-family: var(--ff-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.6;
+      margin-top: 0.1rem;
+    }
+
+    /* hero right — decorative panel */
+    .hero-right {
+      position: relative;
+      background: var(--espresso);
+      overflow: hidden;
+    }
+
+    .hero-img-wrap {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(135deg, rgba(184,115,42,0.35) 0%, transparent 60%),
+        var(--espresso);
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* SVG decorative café illustration */
+    .cafe-illustration {
+      width: 85%;
+      max-width: 480px;
+      opacity: 0.92;
+    }
+
+    .hero-badge {
+      position: absolute;
+      bottom: 3rem; left: -1.5rem;
+      background: var(--chai);
+      color: white;
+      padding: 1.2rem 1.8rem;
+      border-radius: 2px;
+      text-align: center;
+      box-shadow: 4px 4px 0 var(--chai-dark);
+    }
+
+    .badge-year {
+      font-family: var(--ff-display);
+      font-size: 2.2rem;
+      font-weight: 900;
+      display: block;
+      line-height: 1;
+    }
+
+    .badge-text {
+      font-family: var(--ff-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+
+    /* Decorative pattern strip */
+    .pattern-strip {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 8px;
+      background: repeating-linear-gradient(90deg, var(--chai) 0, var(--chai) 12px, var(--chai-dark) 12px, var(--chai-dark) 24px);
+    }
+
+    /* ============================================
+       MARQUEE
+    ============================================ */
+    .marquee-wrap {
+      background: var(--chai);
+      padding: 0.85rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .marquee-track {
+      display: inline-flex;
+      animation: marquee 28s linear infinite;
+    }
+
+    .marquee-item {
+      font-family: var(--ff-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--warm-white);
+      padding: 0 3rem;
+    }
+
+    .marquee-item::after {
+      content: '✦';
+      margin-left: 3rem;
+      opacity: 0.5;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ============================================
+       SECTIONS — common
+    ============================================ */
+    section { padding: var(--section-pad) clamp(1.5rem, 6vw, 5rem); }
+
+    .section-tag {
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--chai);
+      display: flex; align-items: center; gap: 0.7rem;
+      margin-bottom: 1rem;
+    }
+    .section-tag::before {
+      content: '';
+      display: block; width: 2rem; height: 1px;
+      background: var(--chai);
+    }
+
+    h2 {
+      font-family: var(--ff-display);
+      font-size: clamp(2.2rem, 4vw, 3.6rem);
+      font-weight: 900;
+      color: var(--ink);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    h2 em { font-style: italic; color: var(--chai); }
+
+    /* ============================================
+       ABOUT
+    ============================================ */
+    #about {
+      background: var(--warm-white);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 6vw, 6rem);
+      align-items: center;
+    }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-img-card {
+      width: 100%;
+      aspect-ratio: 4/5;
+      background: var(--parchment);
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .about-img-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(180deg, transparent 40%, rgba(44,24,16,0.6) 100%);
+      z-index: 1;
+    }
+
+    .about-img-inner {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 8rem;
+      filter: sepia(0.3);
+    }
+
+    .about-caption {
+      position: absolute; bottom: 1.5rem; left: 1.5rem; right: 1.5rem;
+      z-index: 2;
+      font-family: var(--ff-display);
+      font-size: 1.1rem;
+      font-style: italic;
+      color: white;
+      opacity: 0.9;
+    }
+
+    .float-tag {
+      position: absolute;
+      top: -1.5rem; right: -1.5rem;
+      background: var(--rust);
+      color: white;
+      width: 5.5rem; height: 5.5rem;
+      border-radius: 50%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      font-family: var(--ff-display);
+      font-weight: 900;
+      font-size: 1.05rem;
+      line-height: 1.1;
+      box-shadow: 3px 3px 0 var(--chai-dark);
+    }
+
+    .float-tag small {
+      font-family: var(--ff-mono);
+      font-size: 0.5rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .about-content { }
+
+    .about-body {
+      color: var(--espresso);
+      font-size: 1.1rem;
+      font-weight: 300;
+      line-height: 1.85;
+      margin: 1.6rem 0 2rem;
+    }
+
+    .about-body p + p { margin-top: 1rem; }
+
+    .about-pillars {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    .pillar {
+      padding: 1.2rem;
+      border: 1px solid var(--parchment);
+      border-radius: 2px;
+    }
+
+    .pillar-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .pillar-label {
+      font-family: var(--ff-display);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--ink);
+    }
+    .pillar-desc {
+      font-size: 0.85rem;
+      color: var(--espresso);
+      opacity: 0.7;
+      margin-top: 0.2rem;
+    }
+
+    /* ============================================
+       MENU
+    ============================================ */
+    #menu {
+      background: var(--espresso);
+      color: var(--cream);
+    }
+
+    #menu .section-tag { color: var(--chai-light); }
+    #menu .section-tag::before { background: var(--chai-light); }
+    #menu h2 { color: var(--cream); }
+    #menu h2 em { color: var(--chai-light); }
+
+    .menu-intro {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      flex-wrap: wrap; gap: 1rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .menu-note {
+      font-size: 0.88rem;
+      opacity: 0.55;
+      font-style: italic;
+      max-width: 36ch;
+    }
+
+    .menu-categories {
+      display: flex; gap: 0.6rem; flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .cat-btn {
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.45rem 1.1rem;
+      border: 1px solid rgba(245,237,217,0.2);
+      border-radius: 999px;
+      color: var(--cream);
+      opacity: 0.6;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: none;
+    }
+
+    .cat-btn:hover, .cat-btn.active {
+      background: var(--chai);
+      border-color: var(--chai);
+      opacity: 1;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5px;
+      background: rgba(245,237,217,0.07);
+      border: 1.5px solid rgba(245,237,217,0.07);
+    }
+
+    .menu-item {
+      background: var(--espresso);
+      padding: 1.8rem;
+      transition: background 0.2s;
+      display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .menu-item:hover { background: rgba(184,115,42,0.12); }
+
+    .menu-emoji { font-size: 2rem; flex-shrink: 0; margin-top: 0.1rem; }
+
+    .menu-name {
+      font-family: var(--ff-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 0.25rem;
+    }
+
+    .menu-desc {
+      font-size: 0.85rem;
+      opacity: 0.55;
+      line-height: 1.5;
+    }
+
+    .menu-price {
+      font-family: var(--ff-mono);
+      font-size: 0.8rem;
+      color: var(--chai-light);
+      margin-top: 0.6rem;
+      display: block;
+    }
+
+    /* ============================================
+       EXPERIENCE / GALLERY STRIP
+    ============================================ */
+    #experience {
+      background: var(--parchment);
+      text-align: center;
+    }
+
+    .exp-header { max-width: 56ch; margin: 0 auto 4rem; }
+    .exp-header .section-tag { justify-content: center; }
+    .exp-header .section-tag::before { display: none; }
+
+    .exp-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto;
+      gap: 1rem;
+    }
+
+    .exp-card {
+      background: var(--cream);
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .exp-card.tall { grid-row: span 2; }
+
+    .exp-inner {
+      width: 100%;
+      aspect-ratio: 1;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 0.5rem;
+      padding: 2rem;
+      font-size: 3rem;
+      background: var(--cream);
+    }
+
+    .exp-card.tall .exp-inner { aspect-ratio: unset; height: 100%; }
+
+    .exp-card-label {
+      font-family: var(--ff-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .exp-card-sub {
+      font-size: 0.82rem;
+      opacity: 0.6;
+    }
+
+    /* Pull-quote */
+    .pullquote-section {
+      background: var(--chai);
+      padding: clamp(4rem, 7vw, 6rem) clamp(1.5rem, 6vw, 5rem);
+      text-align: center;
+    }
+
+    blockquote {
+      font-family: var(--ff-display);
+      font-size: clamp(1.6rem, 3vw, 2.6rem);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--warm-white);
+      line-height: 1.45;
+      max-width: 26em;
+      margin: 0 auto;
+    }
+
+    blockquote::before { content: '\201C'; }
+    blockquote::after  { content: '\201D'; }
+
+    .quote-attr {
+      margin-top: 1.5rem;
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--warm-white);
+      opacity: 0.65;
+    }
+
+    /* ============================================
+       TESTIMONIALS
+    ============================================ */
+    #testimonials {
+      background: var(--warm-white);
+    }
+
+    .test-header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      flex-wrap: wrap; gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .review-stars {
+      color: var(--chai);
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+    }
+
+    .test-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .test-card {
+      background: var(--cream);
+      padding: 2rem;
+      border-radius: 2px;
+      border-top: 3px solid var(--chai);
+      position: relative;
+    }
+
+    .test-text {
+      font-size: 1.02rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--espresso);
+      margin-bottom: 1.5rem;
+    }
+
+    .test-author {
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+
+    .test-avatar {
+      width: 2.5rem; height: 2.5rem;
+      background: var(--parchment);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .test-name {
+      font-family: var(--ff-display);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .test-meta {
+      font-family: var(--ff-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.5;
+      margin-top: 0.1rem;
+    }
+
+    /* ============================================
+       FIND US / CONTACT
+    ============================================ */
+    #contact {
+      background: var(--ink);
+      color: var(--cream);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    .contact-info {
+      padding: clamp(4rem, 8vw, 7rem) clamp(2rem, 5vw, 5rem);
+    }
+
+    .contact-info .section-tag { color: var(--chai-light); }
+    .contact-info .section-tag::before { background: var(--chai-light); }
+    .contact-info h2 { color: var(--cream); }
+    .contact-info h2 em { color: var(--chai-light); }
+
+    .contact-body {
+      font-size: 1rem;
+      font-weight: 300;
+      opacity: 0.7;
+      margin: 1.2rem 0 2.5rem;
+    }
+
+    .info-rows { display: flex; flex-direction: column; gap: 1.5rem; }
+
+    .info-row {
+      display: flex; gap: 1.2rem; align-items: flex-start;
+    }
+
+    .info-icon {
+      width: 2.2rem; height: 2.2rem;
+      background: rgba(184,115,42,0.2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .info-label {
+      font-family: var(--ff-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--chai-light);
+      margin-bottom: 0.2rem;
+    }
+
+    .info-value {
+      font-size: 0.95rem;
+      opacity: 0.8;
+      line-height: 1.5;
+    }
+
+    .cta-cluster {
+      display: flex; gap: 0.8rem; flex-wrap: wrap;
+      margin-top: 2.5rem;
+    }
+
+    .btn-whatsapp {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: #25D366;
+      color: white;
+      font-family: var(--ff-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.8rem 1.6rem;
+      border-radius: 2px;
+      transition: filter 0.2s;
+    }
+    .btn-whatsapp:hover { filter: brightness(0.9); }
+
+    .btn-call {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      border: 1px solid rgba(245,237,217,0.25);
+      color: var(--cream);
+      font-family: var(--ff-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.8rem 1.6rem;
+      border-radius: 2px;
+      transition: background 0.2s;
+    }
+    .btn-call:hover { background: rgba(245,237,217,0.1); }
+
+    /* Map placeholder */
+    .contact-map {
+      background: #1e1108;
+      position: relative;
+      overflow: hidden;
+      min-height: 400px;
+    }
+
+    .map-placeholder {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 1rem;
+    }
+
+    .map-pin { font-size: 3rem; }
+
+    .map-label {
+      font-family: var(--ff-display);
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .map-address {
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cream);
+      opacity: 0.5;
+      text-align: center;
+      max-width: 30ch;
+    }
+
+    /* embedded iframe map */
+    .contact-map iframe {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      border: 0;
+      filter: sepia(0.4) contrast(1.05);
+    }
+
+    /* ============================================
+       FOOTER
+    ============================================ */
+    footer {
+      background: var(--ink);
+      border-top: 1px solid rgba(245,237,217,0.08);
+      padding: 2.5rem clamp(1.5rem, 6vw, 5rem);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+
+    .footer-brand {
+      font-family: var(--ff-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .footer-brand span { font-style: italic; color: var(--chai-light); }
+
+    .footer-copy {
+      font-family: var(--ff-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cream);
+      opacity: 0.35;
+    }
+
+    .footer-links {
+      display: flex; gap: 1.5rem; list-style: none;
+    }
+
+    .footer-links a {
+      font-family: var(--ff-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cream);
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+    .footer-links a:hover { opacity: 1; }
+
+    /* ============================================
+       SCROLL ANIMATIONS
+    ============================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ============================================
+       RESPONSIVE
+    ============================================ */
+    @media (max-width: 900px) {
+      #hero { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      h1 { font-size: clamp(2.8rem, 9vw, 4rem); }
+
+      #about { grid-template-columns: 1fr; }
+      .about-visual { order: -1; }
+      .about-img-card { aspect-ratio: 3/2; }
+
+      #contact { grid-template-columns: 1fr; }
+      .contact-map { min-height: 300px; }
+
+      .exp-grid { grid-template-columns: 1fr 1fr; }
+      .exp-card.tall { grid-row: span 1; }
+
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    @media (max-width: 600px) {
+      .exp-grid { grid-template-columns: 1fr; }
+      .about-pillars { grid-template-columns: 1fr; }
+      .hero-stats { gap: 1.5rem; }
+    }
+
+    /* Mobile menu open */
+    nav.open .nav-links {
+      display: flex; flex-direction: column;
+      position: fixed;
+      top: 4.5rem; left: 0; right: 0;
+      background: var(--cream);
+      padding: 2rem;
+      border-bottom: 1px solid var(--parchment);
+      z-index: 99;
+      gap: 1.5rem;
+    }
+
+    nav.open .nav-cta {
+      display: inline-flex;
+      margin: 0 2rem 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <nav id="mainNav">
+    <div class="nav-logo">Nimrah <span>Café</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">Our Story</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#contact">Find Us</a></li>
+    </ul>
+    <a class="nav-cta" href="#contact">Visit Us →</a>
+    <div class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section id="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow reveal">Since 1939 · Charminar, Hyderabad</div>
+      <h1 class="reveal reveal-delay-1">
+        The Soul of<br>
+        <em>Irani Chai</em>
+      </h1>
+      <p class="hero-desc reveal reveal-delay-2">
+        For over eight decades, Nimrah has been Hyderabad's most beloved meeting
+        point — where the city slows down, stories are shared, and every sip of
+        chai tastes like home.
+      </p>
+      <div class="hero-actions reveal reveal-delay-3">
+        <a class="btn-primary" href="#menu">Explore the Menu →</a>
+        <a class="btn-ghost" href="#contact">Find Us</a>
+      </div>
+      <div class="hero-stats reveal reveal-delay-4">
+        <div>
+          <span class="stat-num">85+</span>
+          <span class="stat-label">Years of legacy</span>
+        </div>
+        <div>
+          <span class="stat-num">5K+</span>
+          <span class="stat-label">Cups daily</span>
+        </div>
+        <div>
+          <span class="stat-num">4.8★</span>
+          <span class="stat-label">Google rating</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-img-wrap">
+        <!-- Decorative SVG illustration -->
+        <svg class="cafe-illustration" viewBox="0 0 480 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Background warm glow -->
+          <circle cx="240" cy="260" r="200" fill="rgba(184,115,42,0.12)"/>
+
+          <!-- Table -->
+          <rect x="100" y="360" width="280" height="12" rx="6" fill="#8C531A" opacity="0.6"/>
+          <rect x="155" y="372" width="12" height="80" rx="4" fill="#6B3D10" opacity="0.5"/>
+          <rect x="313" y="372" width="12" height="80" rx="4" fill="#6B3D10" opacity="0.5"/>
+
+          <!-- Cup shadow -->
+          <ellipse cx="200" cy="370" rx="40" ry="8" fill="rgba(44,24,16,0.25)"/>
+
+          <!-- Cup body -->
+          <path d="M168 310 Q165 370 165 368 Q200 382 235 368 Q235 370 232 310 Z" fill="#F5EDD9" stroke="#D4954A" stroke-width="2"/>
+          <!-- Cup handle -->
+          <path d="M232 325 Q260 325 260 345 Q260 365 232 362" stroke="#D4954A" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <!-- Tea inside cup -->
+          <path d="M171 340 Q200 354 229 340 L232 310 L168 310 Z" fill="#B8732A" opacity="0.7"/>
+          <!-- Steam lines -->
+          <path d="M188 300 Q192 285 188 270" stroke="#F5EDD9" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+          <path d="M200 295 Q206 278 200 262" stroke="#F5EDD9" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+          <path d="M213 300 Q217 284 213 270" stroke="#F5EDD9" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+          <!-- Saucer -->
+          <ellipse cx="200" cy="370" rx="42" ry="9" fill="#EDE0C4" stroke="#D4954A" stroke-width="1.5"/>
+
+          <!-- Osmania biscuit stack -->
+          <ellipse cx="310" cy="360" rx="35" ry="10" fill="#C8A96E" opacity="0.9"/>
+          <ellipse cx="310" cy="350" rx="35" ry="10" fill="#D4954A" opacity="0.9"/>
+          <ellipse cx="310" cy="340" rx="35" ry="10" fill="#C8A96E" opacity="0.9"/>
+          <!-- Biscuit dots -->
+          <circle cx="295" cy="340" r="2" fill="rgba(44,24,16,0.3)"/>
+          <circle cx="310" cy="337" r="2" fill="rgba(44,24,16,0.3)"/>
+          <circle cx="324" cy="340" r="2" fill="rgba(44,24,16,0.3)"/>
+
+          <!-- Window pane top -->
+          <rect x="80" y="80" width="320" height="200" rx="4" fill="rgba(245,237,217,0.06)" stroke="rgba(184,115,42,0.3)" stroke-width="2"/>
+          <line x1="240" y1="80" x2="240" y2="280" stroke="rgba(184,115,42,0.2)" stroke-width="1.5"/>
+          <line x1="80" y1="180" x2="400" y2="180" stroke="rgba(184,115,42,0.2)" stroke-width="1.5"/>
+
+          <!-- Arch window top -->
+          <path d="M80 180 Q80 80 240 80 Q400 80 400 180" fill="rgba(184,115,42,0.04)" stroke="rgba(184,115,42,0.2)" stroke-width="1.5"/>
+
+          <!-- Nimrah text on wall -->
+          <text x="240" y="175" font-family="Georgia,serif" font-size="28" font-weight="bold" font-style="italic"
+                text-anchor="middle" fill="rgba(184,115,42,0.55)" letter-spacing="3">NIMRAH</text>
+          <text x="240" y="200" font-family="monospace" font-size="10"
+                text-anchor="middle" fill="rgba(184,115,42,0.35)" letter-spacing="6">EST. 1939</text>
+
+          <!-- Decorative stars -->
+          <text x="120" y="130" font-size="12" fill="rgba(200,169,110,0.4)">✦</text>
+          <text x="345" y="140" font-size="10" fill="rgba(200,169,110,0.4)">✦</text>
+          <text x="240" y="115" font-size="8" fill="rgba(200,169,110,0.35)">✦</text>
+        </svg>
+
+        <div class="hero-badge">
+          <span class="badge-year">1939</span>
+          <span class="badge-text">Est. Hyderabad</span>
+        </div>
+      </div>
+      <div class="pattern-strip"></div>
+    </div>
+  </section>
+
+  <!-- ===== MARQUEE ===== -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span class="marquee-item">Osmania Biscuits</span>
+      <span class="marquee-item">Irani Chai</span>
+      <span class="marquee-item">Bun Maska</span>
+      <span class="marquee-item">Near Charminar</span>
+      <span class="marquee-item">Open Since 1939</span>
+      <span class="marquee-item">Hyderabadi Legacy</span>
+      <span class="marquee-item">Authentic Flavours</span>
+      <span class="marquee-item">Osmania Biscuits</span>
+      <span class="marquee-item">Irani Chai</span>
+      <span class="marquee-item">Bun Maska</span>
+      <span class="marquee-item">Near Charminar</span>
+      <span class="marquee-item">Open Since 1939</span>
+      <span class="marquee-item">Hyderabadi Legacy</span>
+      <span class="marquee-item">Authentic Flavours</span>
+    </div>
+  </div>
+
+  <!-- ===== ABOUT ===== -->
+  <section id="about">
+    <div class="about-visual reveal">
+      <div class="about-img-card">
+        <div class="about-img-inner">☕</div>
+        <div class="about-caption">Where Hyderabad comes to breathe</div>
+      </div>
+      <div class="float-tag">
+        85+<br><small>Years</small>
+      </div>
+    </div>
+
+    <div class="about-content">
+      <div class="section-tag reveal">Our Story</div>
+      <h2 class="reveal reveal-delay-1">More than a café —<br><em>a landmark.</em></h2>
+      <div class="about-body reveal reveal-delay-2">
+        <p>
+          Tucked right beside the majestic Charminar, Nimrah Café & Bakery has
+          been serving the people of Hyderabad since 1939. What started as a
+          small Irani-style tea shop became the city's most iconic cultural stop.
+        </p>
+        <p>
+          Every morning, queues of locals, tourists, and food lovers line up for
+          the legendary pairing: warm, flaky Osmania biscuits dunked into freshly
+          brewed Irani chai. It's not just breakfast — it's a ritual.
+        </p>
+        <p>
+          We serve no distractions, no pretense. Just honest food, honest chai,
+          and honest Hyderabadi warmth.
+        </p>
+      </div>
+
+      <div class="about-pillars reveal reveal-delay-3">
+        <div class="pillar">
+          <div class="pillar-icon">🏺</div>
+          <div class="pillar-label">Heritage Recipe</div>
+          <div class="pillar-desc">Original Irani-style chai brewed the same way for 85 years</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🌅</div>
+          <div class="pillar-label">Open from 5AM</div>
+          <div class="pillar-desc">First chai of the day, every day, without compromise</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🕌</div>
+          <div class="pillar-label">Prime Location</div>
+          <div class="pillar-desc">Steps from Charminar, the heart of old Hyderabad</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🤝</div>
+          <div class="pillar-label">Family-Run</div>
+          <div class="pillar-desc">Three generations of the same family, same love</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MENU ===== -->
+  <section id="menu">
+    <div class="menu-intro">
+      <div>
+        <div class="section-tag reveal">What We Serve</div>
+        <h2 class="reveal reveal-delay-1">Simple food.<br><em>Unforgettable taste.</em></h2>
+      </div>
+      <p class="menu-note reveal reveal-delay-2">
+        Our menu is deliberately small. Every item is made with care, every morning, fresh.
+      </p>
+    </div>
+
+    <div class="menu-categories reveal">
+      <button class="cat-btn active" onclick="filterMenu('all', this)">All</button>
+      <button class="cat-btn" onclick="filterMenu('chai', this)">Chai & Drinks</button>
+      <button class="cat-btn" onclick="filterMenu('bakery', this)">Bakery</button>
+      <button class="cat-btn" onclick="filterMenu('breakfast', this)">Breakfast</button>
+    </div>
+
+    <div class="menu-grid" id="menuGrid">
+      <!-- Chai & Drinks -->
+      <div class="menu-item" data-cat="chai">
+        <div class="menu-emoji">☕</div>
+        <div>
+          <div class="menu-name">Irani Chai</div>
+          <div class="menu-desc">Slow-brewed in milk with cardamom & a touch of mawa. The original, the legend.</div>
+          <span class="menu-price">₹ 20</span>
+        </div>
+      </div>
+      <div class="menu-item" data-cat="chai">
+        <div class="menu-emoji">🧊</div>
+        <div>
+          <div class="menu-name">Iced Chai</div>
+          <div class="menu-desc">Our Irani chai chilled over ice. Refreshing and rich.</div>
+          <span class="menu-price">₹ 35</span>
+        </div>
+      </div>
+      <div class="menu-item" data-cat="chai">
+        <div class="menu-emoji">☕</div>
+        <div>
+          <div class="menu-name">Qahwa</div>
+          <div class="menu-desc">Traditional Arabic coffee with saffron and cardamom. A rare gem.</div>
+          <span class="menu-price">₹ 45</span>
+        </div>
+      </div>
+
+      <!-- Bakery -->
+      <div class="menu-item" data-cat="bakery">
+        <div class="menu-emoji">🍪</div>
+        <div>
+          <div class="menu-name">Osmania Biscuits</div>
+          <div class="menu-desc">Crispy, buttery, slightly sweet — the biscuit that defines Hyderabad. Baked in-house every morning.</div>
+          <span class="menu-price">₹ 10 / piece</span>
+        </div>
+      </div>
+      <div class="menu-item" data-cat="bakery">
+        <div class="menu-emoji">🧆</div>
+        <div>
+          <div class="menu-name">Bun Maska</div>
+          <div class="menu-desc">Soft, pillowy bun slathered generously with real salted butter. Best dunked in chai.</div>
+          <span class="menu-price">₹ 25</span>
+        </div>
+      </div>
+      <div class="menu-item" data-cat="bakery">
+        <div class="menu-emoji">🥐</div>
+        <div>
+          <div class="menu-name">Khari Biscuit</div>
+          <div class="menu-desc">Puff pastry crackers, flaky and savoury. A chai-time classic.</div>
+          <span class="menu-price">₹ 8 / piece</span>
+        </div>
+      </div>
+      <div class="menu-item" data-cat="bakery">
+        <div class="menu-emoji">🍞</div>
+        <div>
+          <div class="menu-name">Dilkhush</div>
+          <div class="menu-desc">Sweet bread filled with dried fruits and cream. An old-Hyderabad special.</div>
+          <span class="menu-price">₹ 40</span>
+        </div>
+      </div>
+
+      <!-- Breakfast -->
+      <div class="menu-item" data-cat="breakfast">
+        <div class="menu-emoji">🥚</div>
+        <div>
+          <div class="menu-name">Keema Pav</div>
+          <div class="menu-desc">Spiced minced meat served with fresh-baked pav. A hearty morning treat.</div>
+          <span class="menu-price">₹ 80</span>
+        </div>
+      </div>
+      <div class="menu-item" data-cat="breakfast">
+        <div class="menu-emoji">🥗</div>
+        <div>
+          <div class="menu-name">Akuri</div>
+          <div class="menu-desc">Parsi-style scrambled eggs with onions, chillies & spices. On buttered pav.</div>
+          <span class="menu-price">₹ 70</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== EXPERIENCE ===== -->
+  <section id="experience">
+    <div class="exp-header">
+      <div class="section-tag">The Nimrah Experience</div>
+      <h2>Come for the chai.<br><em>Stay for the feeling.</em></h2>
+      <p style="margin-top:1rem;opacity:0.65;font-weight:300;">
+        There's something about this corner of old Hyderabad that no app can replicate. You have to feel it.
+      </p>
+    </div>
+
+    <div class="exp-grid reveal">
+      <div class="exp-card tall">
+        <div class="exp-inner" style="background: var(--parchment); font-size: 5rem; height: 100%; min-height: 300px;">
+          🕌
+          <div class="exp-card-label">Beside Charminar</div>
+          <div class="exp-card-sub">The most iconic view in Hyderabad</div>
+        </div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-inner" style="background: #f0e8d4;">
+          ☕
+          <div class="exp-card-label">Irani Chai</div>
+          <div class="exp-card-sub">Brewed since 5am every day</div>
+        </div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-inner" style="background: #ede0c4;">
+          🍪
+          <div class="exp-card-label">Osmania Biscuits</div>
+          <div class="exp-card-sub">Baked fresh each morning</div>
+        </div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-inner" style="background: #f5edd9;">
+          🌅
+          <div class="exp-card-label">Open from 5 AM</div>
+          <div class="exp-card-sub">For the city's early risers</div>
+        </div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-inner" style="background: #ede0c4;">
+          📸
+          <div class="exp-card-label">Instagram Famous</div>
+          <div class="exp-card-sub">Most photographed café in Hyd</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PULL QUOTE ===== -->
+  <div class="pullquote-section">
+    <blockquote class="reveal">
+      No trip to Hyderabad is complete without chai and Osmania biscuits at Nimrah.
+    </blockquote>
+    
+  </div>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section id="testimonials">
+    <div class="test-header">
+      <div>
+        <div class="section-tag">What People Say</div>
+        <h2>Loved by <em>thousands.</em></h2>
+      </div>
+      <div>
+        <div class="review-stars">★★★★★</div>
+        <div style="font-family:var(--ff-mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;opacity:0.5;margin-top:0.2rem;">4.8 / 5 on Google</div>
+      </div>
+    </div>
+
+    <div class="test-grid">
+      <div class="test-card reveal">
+        <div class="review-stars" style="margin-bottom:1rem;font-size:0.8rem;">★★★★★</div>
+        <p class="test-text">
+          "This place is pure magic. Woke up at 5am just to be here first. The chai
+          is unlike anything you'll ever have — creamy, perfectly spiced, served in a tiny
+          glass. And those Osmania biscuits? I could eat them every single morning forever."
+        </p>
+        <div class="test-author">
+          <div class="test-avatar">👤</div>
+          <div>
+            <div class="test-name">Priya R.</div>
+            <div class="test-meta">Bangalore · Google Review</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="test-card reveal reveal-delay-1">
+        <div class="review-stars" style="margin-bottom:1rem;font-size:0.8rem;">★★★★★</div>
+        <p class="test-text">
+          "We visited from Delhi and made it a point to come here twice. The location
+          right next to Charminar is stunning. But it's the chai — the chai that made
+          us miss our train. Worth every minute."
+        </p>
+        <div class="test-author">
+          <div class="test-avatar">👤</div>
+          <div>
+            <div class="test-name">Arjun M.</div>
+            <div class="test-meta">Delhi · Zomato Review</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="test-card reveal reveal-delay-2">
+        <div class="review-stars" style="margin-bottom:1rem;font-size:0.8rem;">★★★★★</div>
+        <p class="test-text">
+          "I'm a Hyderabadi and Nimrah is my weekly ritual. 30 years of eating here
+          and it still hits the same. This is what authentic means. Don't change a thing."
+        </p>
+        <div class="test-author">
+          <div class="test-avatar">👤</div>
+          <div>
+            <div class="test-name">Syed Faizal</div>
+            <div class="test-meta">Hyderabad · Local Guide</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section id="contact">
+    <div class="contact-info">
+      <div class="section-tag">Find Us</div>
+      <h2>We're right where<br><em>Hyderabad begins.</em></h2>
+      <p class="contact-body">
+        Just steps from the Charminar clock tower. Look for the queue —
+        that's how you know you've arrived.
+      </p>
+
+      <div class="info-rows">
+        <div class="info-row">
+          <div class="info-icon">📍</div>
+          <div>
+            <div class="info-label">Address</div>
+            <div class="info-value">20-3-172, Near Charminar,<br>Pathergatti, Hyderabad — 500 002</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">🕐</div>
+          <div>
+            <div class="info-label">Hours</div>
+            <div class="info-value">Monday – Sunday<br>5:00 AM – 11:00 PM</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">📞</div>
+          <div>
+            <div class="info-label">Phone</div>
+            <div class="info-value">+91 40 2452 2000</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">🚌</div>
+          <div>
+            <div class="info-label">How to Get Here</div>
+            <div class="info-value">Auto / Bus to Charminar stop. Walk 1 minute north.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-cluster">
+        <a class="btn-whatsapp" href="https://wa.me/914024522000" target="_blank" rel="noopener">
+          <span>💬</span> WhatsApp Us
+        </a>
+        <a class="btn-call" href="tel:+914024522000">
+          <span>📞</span> Call Now
+        </a>
+      </div>
+    </div>
+
+    <div class="contact-map">
+      <!-- Embedded Google Maps – Nimrah Cafe Hyderabad -->
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.3984290862403!2d78.4741!3d17.3616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb97c1a15a87ff%3A0x6b8e2d7a8b8e9b3c!2sNimrah%20Cafe%20%26%20Bakery!5e0!3m2!1sen!2sin!4v1234567890"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Nimrah Café location on Google Maps">
+      </iframe>
+      <!-- fallback if map can't load -->
+      <div class="map-placeholder" style="pointer-events:none;">
+        <div class="map-pin">📍</div>
+        <div class="map-label">Nimrah Café & Bakery</div>
+        <div class="map-address">Near Charminar, Pathergatti<br>Hyderabad — 500 002</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="footer-brand">Nimrah <span>Café & Bakery</span></div>
+    <ul class="footer-links">
+      <li><a href="#about">Story</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 Nimrah Café, Hyderabad. Est. 1939.</div>
+  </footer>
+
+  <!-- ===== JS ===== -->
+  <script>
+    // ---- Scroll reveal ----
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    revealEls.forEach(el => observer.observe(el));
+
+    // trigger hero items immediately
+    document.querySelectorAll('#hero .reveal').forEach(el => {
+      setTimeout(() => el.classList.add('visible'), 100);
+    });
+
+    // ---- Mobile nav ----
+    function toggleMenu() {
+      document.getElementById('mainNav').classList.toggle('open');
+    }
+
+    // ---- Menu filter ----
+    function filterMenu(cat, btn) {
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      document.querySelectorAll('.menu-item').forEach(item => {
+        if (cat === 'all' || item.dataset.cat === cat) {
+          item.style.display = 'flex';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    // ---- Sticky nav shrink ----
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('mainNav');
+      if (window.scrollY > 60) {
+        nav.style.padding = '0.85rem clamp(1.5rem,5vw,4rem)';
+      } else {
+        nav.style.padding = '1.25rem clamp(1.5rem,5vw,4rem)';
+      }
+    });
+  </script>
+</body>
+</html>
