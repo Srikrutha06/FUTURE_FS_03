@@ -18,7 +18,7 @@ Warm cream & chai-brown theme with elegant typography and clean UI.
 HTML, CSS, Vanilla JavaScript
 
 🌐 Live Demo:https://srikrutha06.github.io/FUTURE_FS_03/
-💻 GitHub:
+💻 GitHub:https://github.com/Srikrutha06/FUTURE_FS_03
 
 📈 Impact
 Improves online visibility, helps customers explore the menu, and enables direct communication with the café.
